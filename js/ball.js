@@ -9,7 +9,17 @@ var dy = -2;
 //width and height will be the same for both paddles
 var paddleHeight = 10;
 var paddleWidth = 75;
-var bottomPaddleX = (canvas.width-paddleWidth)/2;
+var bottomPaddleX = (canvas.width-paddleWidth) / 2;
+var topPaddleX = (canvas.width-paddleWidth) / 2;
+
+//figure out how to split this up into its own paddle file
+function drawTopPaddle() {
+  ctx.beginPath();
+  ctx.rect(topPaddleX, 0, paddleWidth, paddleHeight);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
 
 function drawBottomPaddle() {
   ctx.beginPath();
@@ -54,6 +64,7 @@ function drawBall() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
+  drawTopPaddle();
   drawBottomPaddle();
 
   if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
