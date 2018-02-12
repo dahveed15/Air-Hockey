@@ -15,7 +15,7 @@ var topPaddleX = (canvas.width-paddleWidth) / 2;
 //figure out how to split this up into its own paddle file
 function drawTopPaddle() {
   ctx.beginPath();
-  ctx.rect(topPaddleX, 0, paddleWidth, paddleHeight);
+  ctx.rect(topPaddleX, paddleHeight * 2, paddleWidth, paddleHeight);
   ctx.fillStyle = "#0095DD";
   ctx.fill();
   ctx.closePath();
@@ -23,7 +23,7 @@ function drawTopPaddle() {
 
 function drawBottomPaddle() {
   ctx.beginPath();
-  ctx.rect(bottomPaddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+  ctx.rect(bottomPaddleX, canvas.height-(paddleHeight + 20), paddleWidth, paddleHeight);
   ctx.fillStyle = "#0095DD";
   ctx.fill();
   ctx.closePath();
