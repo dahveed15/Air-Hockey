@@ -24,6 +24,11 @@ Users will be able to:
   * puck.js: responsible for the logic of moving the ball around
   * paddle.js: responsible for the air hockey paddles hitting the ball
 
+## Wireframe
+
+ ![](https://imgur.com/a/vxoKt)
+
+ This app will consist of a single screen with the simulation canvas, game controls, and nav links to the Github and my LinkedIn.
 
 ## Implementation Timeline
 
