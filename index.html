@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Air Hockey App</title>
+
+    <link rel="stylesheet" href="./css/air_hockey.css">
+  </head>
+  <body>
+    <h1>Air Hockey</h1>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+
+    <script type="text/javascript">
+      let canvas = document.getElementById("myCanvas");
+      let ctx = canvas.getContext("2d");
+
+      let x = canvas.width/2;
+      let y = canvas.height-30;
+      var dx = 2;
+      var dy = -2;
+
+      function drawBall() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+        x += dx;
+        y += dy;
+      }
+
+      function draw() {
+        drawBall()
+      }
+
+      setInterval(draw, 10);
+    </script>
+  </body>
+</html>
