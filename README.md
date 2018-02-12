@@ -26,7 +26,7 @@ Users will be able to:
 
 ## Wireframe
 
- ![](https://imgur.com/a/vxoKt)
+ ![](https://i.imgur.com/uQlSQEf.png)
 
  This app will consist of a single screen with the simulation canvas, game controls, and nav links to the Github and my LinkedIn.
 
