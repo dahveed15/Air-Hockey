@@ -2,7 +2,7 @@ let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
 let x = canvas.width/2;
-let y = canvas.height-30;
+let y = canvas.height/2;
 var dx = 2;
 var dy = -2;
 
@@ -13,6 +13,7 @@ var bottomPaddleRadius = 20;
 var topPaddleRadius = 20;
 var bottomPaddleX = (canvas.width-paddleWidth) / 2;
 var topPaddleX = (canvas.width-paddleWidth) / 2;
+var bottomPaddleY = canvas.height-(paddleHeight + 20);
 
 //figure out how to split this up into its own paddle file
 function drawTopPaddle() {
@@ -25,7 +26,7 @@ function drawTopPaddle() {
 
 function drawBottomPaddle() {
   ctx.beginPath();
-  ctx.arc(bottomPaddleX, canvas.height-(paddleHeight + 20), bottomPaddleRadius, 0, Math.PI * 2);
+  ctx.arc(bottomPaddleX, bottomPaddleY, bottomPaddleRadius, 0, Math.PI * 2);
   ctx.fillStyle = "#cc0000";
   ctx.fill();
   ctx.closePath();
@@ -35,6 +36,8 @@ var ballRadius = 10;
 
 var rightPressed = false;
 var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -44,6 +47,10 @@ function keyDownHandler(e) {
     rightPressed = true;
   } else if (e.keyCode === 37) {
     leftPressed = true;
+  } else if (e.keyCode === 38) {
+    upPressed = true;
+  } else if (e.keyCode === 40) {
+    downPressed = true;
   }
 }
 
@@ -52,6 +59,10 @@ function keyUpHandler(e) {
     rightPressed = false;
   } else if (e.keyCode === 37) {
     leftPressed = false;
+  } else if (e.keyCode === 38) {
+    upPressed = false;
+  } else if (e.keyCode === 40) {
+    downPressed = false;
   }
 }
 
@@ -69,18 +80,25 @@ function draw() {
   drawTopPaddle();
   drawBottomPaddle();
 
+  //ball bouncing across left and right walls
   if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
 
+  //ball bouncing across top and bottom walls (will need to add special cases later)
   if (y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
     dy = -dy;
   }
 
+  //keeps the bottom circle within the boundaries of the table when moving left, right, up, or down
   if (rightPressed && bottomPaddleX < canvas.width-(bottomPaddleRadius + 5)) {
     bottomPaddleX += 7;
   } else if (leftPressed && bottomPaddleX > 25) {
     bottomPaddleX -= 7;
+  } else if (downPressed && bottomPaddleY < canvas.height-(bottomPaddleRadius + 5)) {
+    bottomPaddleY += 7;
+  } else if (upPressed && bottomPaddleY > (canvas.height * (2/3))) {
+    bottomPaddleY -= 7;
   }
 
   x += dx;
