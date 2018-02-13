@@ -77,9 +77,9 @@ function draw() {
     dy = -dy;
   }
 
-  if (rightPressed && bottomPaddleX < canvas.width-paddleWidth) {
+  if (rightPressed && bottomPaddleX < canvas.width-(bottomPaddleRadius + 5)) {
     bottomPaddleX += 7;
-  } else if (leftPressed && bottomPaddleX > 0) {
+  } else if (leftPressed && bottomPaddleX > 25) {
     bottomPaddleX -= 7;
   }
 
