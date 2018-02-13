@@ -19,12 +19,26 @@ let bottomPaddleRadius = 20;
 let bottomPaddleX = (canvas.width-paddleWidth) / 2;
 let bottomPaddleY = canvas.height-(paddleHeight + 20);
 
-
-
 var rightPressed = false;
 var leftPressed = false;
 var upPressed = false;
 var downPressed = false;
+
+function drawTopBound() {
+  ctx.beginPath();
+  ctx.rect(canvas.width * (1/4), 0, canvas.width / 2, 1);
+  ctx.fillStyle = '#000000';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawBottomBound() {
+  ctx.beginPath();
+  ctx.rect(canvas.width * (1/4), canvas.height - 1, canvas.width / 2, 1);
+  ctx.fillStyle = '#000000';
+  ctx.fill();
+  ctx.closePath();
+}
 
 //figure out how to split this up into its own paddle file
 function drawTopPaddle() {
@@ -81,9 +95,11 @@ function drawBall() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawBall();
+  drawTopBound();
   drawTopPaddle();
+  drawBall();
   drawBottomPaddle();
+  drawBottomBound();
   let bottomPaddleDx = x - bottomPaddleX;
   let bottomPaddleDy = y - bottomPaddleY;
   let bottomPaddleDistance = Math.sqrt(bottomPaddleDx * bottomPaddleDx + bottomPaddleDy * bottomPaddleDy);
@@ -98,8 +114,11 @@ function draw() {
     dy = -dy;
   }
 
-  if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
+  //fix circle collision getting stuck
+  if (bottomPaddleDistance <= ballRadius + bottomPaddleRadius) {
+    // debugger;
     dy = -dy;
+    dx = -dx;
   }
 
   //keeps the bottom circle within the boundaries of the table when moving left, right, up, or down
