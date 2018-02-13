@@ -3,17 +3,28 @@ let ctx = canvas.getContext("2d");
 
 let x = canvas.width/2;
 let y = canvas.height/2;
-var dx = 2;
-var dy = -2;
+let dx = 2;
+let dy = -2;
+
+var ballRadius = 10;
 
 //width and height will be the same for both paddles
-var paddleHeight = 10;
-var paddleWidth = 5;
-var bottomPaddleRadius = 20;
-var topPaddleRadius = 20;
-var bottomPaddleX = (canvas.width-paddleWidth) / 2;
-var topPaddleX = (canvas.width-paddleWidth) / 2;
-var bottomPaddleY = canvas.height-(paddleHeight + 20);
+let paddleHeight = 10;
+let paddleWidth = 5;
+
+let topPaddleRadius = 20;
+let topPaddleX = (canvas.width-paddleWidth) / 2;
+
+let bottomPaddleRadius = 20;
+let bottomPaddleX = (canvas.width-paddleWidth) / 2;
+let bottomPaddleY = canvas.height-(paddleHeight + 20);
+
+
+
+var rightPressed = false;
+var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
 
 //figure out how to split this up into its own paddle file
 function drawTopPaddle() {
@@ -32,12 +43,6 @@ function drawBottomPaddle() {
   ctx.closePath();
 }
 
-var ballRadius = 10;
-
-var rightPressed = false;
-var leftPressed = false;
-var upPressed = false;
-var downPressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -79,6 +84,9 @@ function draw() {
   drawBall();
   drawTopPaddle();
   drawBottomPaddle();
+  let bottomPaddleDx = x - bottomPaddleX;
+  let bottomPaddleDy = y - bottomPaddleY;
+  let bottomPaddleDistance = Math.sqrt(bottomPaddleDx * bottomPaddleDx + bottomPaddleDy * bottomPaddleDy);
 
   //ball bouncing across left and right walls
   if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
@@ -90,6 +98,10 @@ function draw() {
     dy = -dy;
   }
 
+  if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
+    dy = -dy;
+  }
+
   //keeps the bottom circle within the boundaries of the table when moving left, right, up, or down
   if (rightPressed && bottomPaddleX < canvas.width-(bottomPaddleRadius + 5)) {
     bottomPaddleX += 7;
@@ -97,10 +109,11 @@ function draw() {
     bottomPaddleX -= 7;
   } else if (downPressed && bottomPaddleY < canvas.height-(bottomPaddleRadius + 5)) {
     bottomPaddleY += 7;
-  } else if (upPressed && bottomPaddleY > (canvas.height * (2/3))) {
+  } else if (upPressed && bottomPaddleY > (canvas.height * (7/10))) {
     bottomPaddleY -= 7;
   }
 
+  //keep the ball moving with the small change
   x += dx;
   y += dy;
 }
