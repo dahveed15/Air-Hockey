@@ -1,6 +1,9 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
+let allowCollision = true;
+let collisionCounter = 0;
+
 let Player1Score = 0;
 let Player2Score = 0;
 let tag = document.getElementById('player1-score');
@@ -122,6 +125,13 @@ function drawBall() {
 }
 
 function draw() {
+  if (!allowCollision) {
+    collisionCounter += 1;
+    if (collisionCounter === 15) {
+      allowCollision = true;
+      collisionCounter = 0;
+    }
+  }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawTopBound();
   drawTopPaddle();
@@ -172,10 +182,25 @@ function draw() {
   }
 
   //fix circle collision getting stuck
-  if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
-    // debugger;
-    dy = -dy;
-    dx = -dx;
+  if (allowCollision) {
+    if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
+      allowCollision = false;
+      if (dy < 0) {
+        dy = -dy;
+        y += 15;
+      } else {
+        dy = -dy;
+        y -= 15;
+      }
+
+      if (dx < 0) {
+        dx = -dx;
+        x += 15;
+      } else {
+        dx = -dx;
+        x -= 15;
+      }
+    }
   }
 
   //keeps the top paddle within the boundaries of the table when moving left, right, up, or down
@@ -205,4 +230,4 @@ function draw() {
   y += dy;
 }
 
-setInterval(draw, 10);
+setInterval(draw, 15);
