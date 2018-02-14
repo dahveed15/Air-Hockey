@@ -139,7 +139,21 @@ function draw() {
 
   //ball bouncing across top and bottom walls (will need to add special cases later)
   if (y + dy < ballRadius) {
-    dy = -dy;
+    if (x < canvas.width / 4 || x > canvas.width * (3 / 4)) {
+      //make it bounce off of the parts of the wall without the goal
+      dy = -dy;
+    } else {
+      //goal logic for player 1
+      //reset coordinates to center
+      x = canvas.width / 2;
+      y = canvas.height / 2;
+      dx = -dx;
+      dy = -dy;
+
+      //increase the score
+      Player2Score += 1;
+      tag2.innerHTML = Player2Score;
+    }
   } else if (y + dy > canvas.height-ballRadius) {
     if (x < canvas.width / 4 || x > canvas.width * (3 / 4)) {
       dy = -dy;
