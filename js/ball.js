@@ -1,12 +1,17 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
+let Player1Score = 0;
+let Player2Score = 0;
+let tag2 = document.getElementById('player2-score');
+tag2.innerHTML = Player2Score;
+
 let x = canvas.width / 2;
 let y = canvas.height / 2;
 let dx = 2;
 let dy = -2;
 
-var ballRadius = 10;
+let ballRadius = 10;
 
 //width and height will be the same for both paddles
 let paddleHeight = 10;
@@ -19,10 +24,10 @@ let bottomPaddleRadius = 20;
 let bottomPaddleX = (canvas.width-paddleWidth) / 2;
 let bottomPaddleY = canvas.height-(paddleHeight + 20);
 
-var rightPressed = false;
-var leftPressed = false;
-var upPressed = false;
-var downPressed = false;
+let rightPressed = false;
+let leftPressed = false;
+let upPressed = false;
+let downPressed = false;
 
 function drawTopBound() {
   ctx.beginPath();
@@ -121,6 +126,10 @@ function draw() {
       y = canvas.height / 2;
       dx = -dx;
       dy = -dy;
+
+      //increase the score
+      Player2Score += 1;
+      tag2.innerHTML = Player2Score;
     }
   }
 
