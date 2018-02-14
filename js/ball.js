@@ -19,6 +19,7 @@ let paddleWidth = 5;
 
 let topPaddleRadius = 20;
 let topPaddleX = (canvas.width-paddleWidth) / 2;
+let topPaddleY = paddleHeight + 20;
 
 let bottomPaddleRadius = 20;
 let bottomPaddleX = (canvas.width-paddleWidth) / 2;
@@ -28,6 +29,10 @@ let rightPressed = false;
 let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
+let wPressed = false;
+let aPressed = false;
+let sPressed = false;
+let dPressed = false;
 
 function drawTopBound() {
   ctx.beginPath();
@@ -48,7 +53,7 @@ function drawBottomBound() {
 //figure out how to split this up into its own paddle file
 function drawTopPaddle() {
   ctx.beginPath();
-  ctx.arc(topPaddleX, paddleHeight + 20, topPaddleRadius, 0, Math.PI * 2);
+  ctx.arc(topPaddleX, topPaddleY, topPaddleRadius, 0, Math.PI * 2);
   ctx.fillStyle = "#cc0000";
   ctx.fill();
   ctx.closePath();
@@ -75,6 +80,14 @@ function keyDownHandler(e) {
     upPressed = true;
   } else if (e.keyCode === 40) {
     downPressed = true;
+  } else if (e.keyCode === 87) {
+    wPressed = true;
+  } else if (e.keyCode === 65) {
+    aPressed = true;
+  } else if (e.keyCode === 83) {
+    sPressed = true;
+  } else if (e.keyCode === 68) {
+    dPressed = true;
   }
 }
 
@@ -87,6 +100,14 @@ function keyUpHandler(e) {
     upPressed = false;
   } else if (e.keyCode === 40) {
     downPressed = false;
+  } else if (e.keyCode === 87) {
+    wPressed = false;
+  } else if (e.keyCode === 65) {
+    aPressed = false;
+  } else if (e.keyCode === 83) {
+    sPressed = false;
+  } else if (e.keyCode === 68) {
+    dPressed = false;
   }
 }
 
@@ -140,7 +161,18 @@ function draw() {
     dx = -dx;
   }
 
-  //keeps the bottom circle within the boundaries of the table when moving left, right, up, or down
+  //keeps the top paddle within the boundaries of the table when moving left, right, up, or down
+  if (dPressed && topPaddleX < canvas.width-(topPaddleRadius + 5)) {
+    topPaddleX += 7;
+  } else if (aPressed && topPaddleX > 25) {
+    topPaddleX -= 7;
+  } else if (sPressed && topPaddleY < (canvas.height * (3/10))) {
+    topPaddleY += 7;
+  } else if (wPressed && topPaddleY > topPaddleRadius + 5) {
+    topPaddleY -= 7;
+  }
+
+  //keeps the bottom paddle within the boundaries of the table when moving left, right, up, or down
   if (rightPressed && bottomPaddleX < canvas.width-(bottomPaddleRadius + 5)) {
     bottomPaddleX += 7;
   } else if (leftPressed && bottomPaddleX > 25) {
