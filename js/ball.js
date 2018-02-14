@@ -1,8 +1,8 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
-let x = canvas.width/2;
-let y = canvas.height/2;
+let x = canvas.width / 2;
+let y = canvas.height / 2;
 let dx = 2;
 let dy = -2;
 
@@ -110,12 +110,22 @@ function draw() {
   }
 
   //ball bouncing across top and bottom walls (will need to add special cases later)
-  if (y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+  if (y + dy < ballRadius) {
     dy = -dy;
+  } else if (y + dy > canvas.height-ballRadius) {
+    if (x < canvas.width / 4 || x > canvas.width * (3 / 4)) {
+      dy = -dy;
+    } else {
+      //reset coordinates to center
+      x = canvas.width / 2;
+      y = canvas.height / 2;
+      dx = -dx;
+      dy = -dy;
+    }
   }
 
   //fix circle collision getting stuck
-  if (bottomPaddleDistance <= ballRadius + bottomPaddleRadius) {
+  if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
     // debugger;
     dy = -dy;
     dx = -dx;
