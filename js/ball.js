@@ -132,15 +132,35 @@ function draw() {
       collisionCounter = 0;
     }
   }
+
+  //win logic
+  if (Player1Score === 10) {
+    Player1Score = 0;
+    Player2Score = 0;
+    alert("Player 1 wins!");
+    document.location.reload();
+  } else if (Player2Score === 10) {
+    Player1Score = 0;
+    Player2Score = 0;
+    alert("Player 2 wins!");
+    document.location.reload();
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawTopBound();
   drawTopPaddle();
   drawBall();
   drawBottomPaddle();
   drawBottomBound();
+
   let bottomPaddleDx = x - bottomPaddleX;
   let bottomPaddleDy = y - bottomPaddleY;
   let bottomPaddleDistance = Math.sqrt(bottomPaddleDx * bottomPaddleDx + bottomPaddleDy * bottomPaddleDy);
+
+  let topPaddleDx = x - topPaddleX;
+  let topPaddleDy = y - topPaddleY;
+  let topPaddleDistance = Math.sqrt(topPaddleDx * topPaddleDx + topPaddleDy * topPaddleDy);
+
 
   //ball bouncing across left and right walls
   if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
@@ -181,7 +201,7 @@ function draw() {
     }
   }
 
-  //fix circle collision getting stuck
+  //fix bottom circle collision getting stuck (still needs some tweaking)
   if (allowCollision) {
     if (bottomPaddleDistance < ballRadius + bottomPaddleRadius) {
       allowCollision = false;
@@ -202,6 +222,30 @@ function draw() {
       }
     }
   }
+
+
+  if (allowCollision) {
+    if (topPaddleDistance < ballRadius + topPaddleRadius) {
+      allowCollision = false;
+      if (dy < 0) {
+        dy = -dy;
+        y += 15;
+      } else {
+        dy = -dy;
+        y -= 15;
+      }
+
+      if (dx < 0) {
+        dx = -dx;
+        x += 15;
+      } else {
+        dx = -dx;
+        x -= 15;
+      }
+    }
+  }
+
+
 
   //keeps the top paddle within the boundaries of the table when moving left, right, up, or down
   if (dPressed && topPaddleX < canvas.width-(topPaddleRadius + 5)) {
@@ -230,4 +274,4 @@ function draw() {
   y += dy;
 }
 
-setInterval(draw, 15);
+setInterval(draw, 10);
