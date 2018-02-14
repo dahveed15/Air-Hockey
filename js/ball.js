@@ -3,6 +3,8 @@ let ctx = canvas.getContext("2d");
 
 let Player1Score = 0;
 let Player2Score = 0;
+let tag = document.getElementById('player1-score');
+tag.innerHTML = Player1Score;
 let tag2 = document.getElementById('player2-score');
 tag2.innerHTML = Player2Score;
 
@@ -142,6 +144,7 @@ function draw() {
     if (x < canvas.width / 4 || x > canvas.width * (3 / 4)) {
       dy = -dy;
     } else {
+      //goal logic for player 1
       //reset coordinates to center
       x = canvas.width / 2;
       y = canvas.height / 2;
@@ -149,8 +152,8 @@ function draw() {
       dy = -dy;
 
       //increase the score
-      Player2Score += 1;
-      tag2.innerHTML = Player2Score;
+      Player1Score += 1;
+      tag.innerHTML = Player1Score;
     }
   }
 
