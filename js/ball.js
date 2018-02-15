@@ -1,5 +1,16 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
+let nextRound = false;
+let buttonTag = document.getElementById('start-game');
+buttonTag.addEventListener('click', () => {
+  if (nextRound) {
+    nextRound = false;
+    buttonTag.value = "Start Game";
+  } else {
+    nextRound = true;
+    buttonTag.value = "Pause Game";
+  }
+});
 
 let allowCollision = true;
 let collisionCounter = 0;
@@ -192,6 +203,16 @@ function drawBall() {
 //    }
 // }
 
+function resetCoordinates() {
+  x = canvas.width / 2;
+  y = canvas.height / 2;
+  // setTimeout(() => clearInterval(continueExecution), 2000);
+  // // setInterval(draw, 5);
+  // sleep(2000);
+  dx = -dx;
+  dy = -dy;
+}
+
 function draw() {
   if (!allowCollision) {
     collisionCounter += 1;
@@ -202,17 +223,17 @@ function draw() {
   }
 
   // win logic
-  // if (Player1Score === 10) {
-  //   Player1Score = 0;
-  //   Player2Score = 0;
-  //   alert("Player 1 wins!");
-  //   document.location.reload();
-  // } else if (Player2Score === 10) {
-  //   Player1Score = 0;
-  //   Player2Score = 0;
-  //   alert("Player 2 wins!");
-  //   document.location.reload();
-  // }
+  if (Player1Score === 10) {
+    Player1Score = 0;
+    Player2Score = 0;
+    alert("Player 1 wins!");
+    document.location.reload();
+  } else if (Player2Score === 10) {
+    Player1Score = 0;
+    Player2Score = 0;
+    alert("Player 2 wins!");
+    document.location.reload();
+  }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawTopBound();
@@ -246,14 +267,10 @@ function draw() {
       dy = -dy;
     } else {
       //goal logic for player 2
-      //reset coordinates to center
-      x = canvas.width / 2;
-      y = canvas.height / 2;
-      dx = -dx;
-      dy = -dy;
-      // sleep(2000);
-
+      resetCoordinates();
       //increase the score
+      nextRound = false;
+      buttonTag.value = "Next Round";
       Player2Score += 1;
       tag2.innerHTML = Player2Score;
     }
@@ -262,16 +279,13 @@ function draw() {
       dy = -dy;
     } else {
       //goal logic for player 1
-      //reset coordinates to center
-      x = canvas.width / 2;
-      y = canvas.height / 2;
-      dx = -dx;
-      dy = -dy;
-      // sleep(2000);
-
+      resetCoordinates();
       //increase the score
+      nextRound = false;
+      buttonTag.value = "Next Round";
       Player1Score += 1;
       tag.innerHTML = Player1Score;
+
     }
   }
 
@@ -344,8 +358,10 @@ function draw() {
   }
 
   //keep the ball moving with the small change
-  x += dx;
-  y += dy;
+    if (nextRound) {
+      x += dx;
+      y += dy;
+    }
 }
 
 setInterval(draw, 5);
