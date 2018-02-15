@@ -58,20 +58,45 @@ function drawBottomBound() {
 
 function drawMiddleCircle() {
 
+  //top paddle boundary
+  ctx.beginPath();
+  ctx.rect(0, canvas.height * (34.5/100), canvas.width, 1);
+  ctx.fillStyle = '#000000';
+  ctx.fill();
+  ctx.closePath();
+
   //text in the middle
   ctx.font = "21px Pacifico";
   ctx.fillStyle = "#0095DD";
   ctx.fillText("DH", (canvas.width / 2) - 20, (canvas.height / 2) + 8);
 
+  //draw the circle enveloping the text
+  ctx.beginPath();
+  ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI*2);
+  ctx.stroke();
+
+  //bottom paddle boundary
   ctx.beginPath();
   ctx.rect(0, canvas.height * (65.5/100), canvas.width, 1);
   ctx.fillStyle = '#000000';
   ctx.fill();
   ctx.closePath();
 
-  //draw the circle enveloping the text
+}
+
+function drawMiddleCircleBorders() {
+  //left
   ctx.beginPath();
-  ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI*2);
+  ctx.moveTo(0, canvas.height / 2);
+  ctx.lineTo((canvas.width / 2) - 30, canvas.height / 2);
+  ctx.strokeStyle = '#cc0000';
+  ctx.stroke();
+
+  //right
+  ctx.beginPath();
+  ctx.moveTo((canvas.width / 2) + 30, canvas.height / 2);
+  ctx.lineTo(canvas.width, canvas.height / 2);
+  ctx.strokeStyle = '#cc0000';
   ctx.stroke();
 }
 
@@ -185,6 +210,7 @@ function draw() {
   drawTopGoalEntrance();
   drawTopPaddle();
   drawMiddleCircle();
+  drawMiddleCircleBorders();
   drawBall();
   drawBottomPaddle();
   drawBottomGoalEntrance();
