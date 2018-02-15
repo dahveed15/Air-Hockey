@@ -1,6 +1,6 @@
 # Air Hockey
 
-![Live Demo](https://dahveed15.github.io/Air-Hockey/)
+[Live Demo](https://dahveed15.github.io/Air-Hockey/)
 
 ## Background and Overview
 
