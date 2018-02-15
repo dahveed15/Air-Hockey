@@ -18,6 +18,7 @@ let dy = -2;
 
 let ballRadius = 10;
 
+
 //width and height will be the same for both paddles
 let paddleHeight = 10;
 let paddleWidth = 5;
@@ -41,7 +42,7 @@ let dPressed = false;
 
 function drawTopBound() {
   ctx.beginPath();
-  ctx.rect(canvas.width * (1/4), 0, canvas.width / 2, 1);
+  ctx.rect(canvas.width * (1/4), 0, canvas.width / 2, 4);
   ctx.fillStyle = '#000000';
   ctx.fill();
   ctx.closePath();
@@ -49,10 +50,24 @@ function drawTopBound() {
 
 function drawBottomBound() {
   ctx.beginPath();
-  ctx.rect(canvas.width * (1/4), canvas.height - 1, canvas.width / 2, 1);
+  ctx.rect(canvas.width * (1/4), canvas.height - 4, canvas.width / 2, 4);
   ctx.fillStyle = '#000000';
   ctx.fill();
   ctx.closePath();
+}
+
+function drawTopGoalEntrance() {
+  ctx.beginPath();
+  ctx.arc(canvas.width * (1/2), 1, 79, Math.PI, 0, true);
+  ctx.strokeStyle = '#ff0000';
+  ctx.stroke();
+}
+
+function drawBottomGoalEntrance() {
+  ctx.beginPath();
+  ctx.arc(canvas.width * (1/2), canvas.height - 1, 79, 0, Math.PI, true);
+  ctx.strokeStyle = '#ff0000';
+  ctx.stroke();
 }
 
 //figure out how to split this up into its own paddle file
@@ -134,23 +149,25 @@ function draw() {
   }
 
   //win logic
-  if (Player1Score === 10) {
-    Player1Score = 0;
-    Player2Score = 0;
-    alert("Player 1 wins!");
-    document.location.reload();
-  } else if (Player2Score === 10) {
-    Player1Score = 0;
-    Player2Score = 0;
-    alert("Player 2 wins!");
-    document.location.reload();
-  }
+  // if (Player1Score === 10) {
+  //   Player1Score = 0;
+  //   Player2Score = 0;
+  //   alert("Player 1 wins!");
+  //   document.location.reload();
+  // } else if (Player2Score === 10) {
+  //   Player1Score = 0;
+  //   Player2Score = 0;
+  //   alert("Player 2 wins!");
+  //   document.location.reload();
+  // }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawTopBound();
+  drawTopGoalEntrance();
   drawTopPaddle();
   drawBall();
   drawBottomPaddle();
+  drawBottomGoalEntrance();
   drawBottomBound();
 
   let bottomPaddleDx = x - bottomPaddleX;
@@ -223,7 +240,7 @@ function draw() {
     }
   }
 
-
+  //top paddle collision (not perfect)
   if (allowCollision) {
     if (topPaddleDistance < ballRadius + topPaddleRadius) {
       allowCollision = false;
@@ -274,4 +291,4 @@ function draw() {
   y += dy;
 }
 
-setInterval(draw, 10);
+setInterval(draw, 5);
