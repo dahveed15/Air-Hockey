@@ -1,5 +1,7 @@
 # Air Hockey
 
+![Live Demo](https://dahveed15.github.io/Air-Hockey/)
+
 ## Background and Overview
 
 Air Hockey is a 2d game. The goal is to get the puck past the opponent's paddle.
