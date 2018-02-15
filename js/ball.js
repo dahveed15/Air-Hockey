@@ -56,6 +56,25 @@ function drawBottomBound() {
   ctx.closePath();
 }
 
+function drawMiddleCircle() {
+
+  //text in the middle
+  ctx.font = "21px Pacifico";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("DH", (canvas.width / 2) - 20, (canvas.height / 2) + 8);
+
+  ctx.beginPath();
+  ctx.rect(0, canvas.height * (65.5/100), canvas.width, 1);
+  ctx.fillStyle = '#000000';
+  ctx.fill();
+  ctx.closePath();
+
+  //draw the circle enveloping the text
+  ctx.beginPath();
+  ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI*2);
+  ctx.stroke();
+}
+
 function drawTopGoalEntrance() {
   ctx.beginPath();
   ctx.arc(canvas.width * (1/2), 1, 79, Math.PI, 0, true);
@@ -165,6 +184,7 @@ function draw() {
   drawTopBound();
   drawTopGoalEntrance();
   drawTopPaddle();
+  drawMiddleCircle();
   drawBall();
   drawBottomPaddle();
   drawBottomGoalEntrance();
