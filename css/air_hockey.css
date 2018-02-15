@@ -12,4 +12,24 @@ canvas {
   background: #eee;
   display: block;
   margin: 0 auto;
+  border: 15px solid #333333;
+  border-radius: 7px;
+  box-shadow: 0 0 5px 5px #a9a9a9;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+footer a:hover {
+  color: gray;
 }

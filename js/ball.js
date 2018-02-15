@@ -43,7 +43,7 @@ let dPressed = false;
 function drawTopBound() {
   ctx.beginPath();
   ctx.rect(canvas.width * (1/4), 0, canvas.width / 2, 4);
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = '#0095DD';
   ctx.fill();
   ctx.closePath();
 }
@@ -51,7 +51,7 @@ function drawTopBound() {
 function drawBottomBound() {
   ctx.beginPath();
   ctx.rect(canvas.width * (1/4), canvas.height - 4, canvas.width / 2, 4);
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = '#0095DD';
   ctx.fill();
   ctx.closePath();
 }
@@ -102,15 +102,17 @@ function drawMiddleCircleBorders() {
 
 function drawTopGoalEntrance() {
   ctx.beginPath();
-  ctx.arc(canvas.width * (1/2), 1, 79, Math.PI, 0, true);
-  ctx.strokeStyle = '#ff0000';
+  ctx.arc(canvas.width * (1/2), 0, 79, Math.PI, 0, true);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = '#cc0000';
   ctx.stroke();
 }
 
 function drawBottomGoalEntrance() {
   ctx.beginPath();
-  ctx.arc(canvas.width * (1/2), canvas.height - 1, 79, 0, Math.PI, true);
-  ctx.strokeStyle = '#ff0000';
+  ctx.arc(canvas.width * (1/2), canvas.height, 79, 0, Math.PI, true);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = '#cc0000';
   ctx.stroke();
 }
 
@@ -183,6 +185,13 @@ function drawBall() {
   ctx.closePath();
 }
 
+// function sleep(miliseconds) {
+//    var currentTime = new Date().getTime();
+//
+//    while (currentTime + miliseconds >= new Date().getTime()) {
+//    }
+// }
+
 function draw() {
   if (!allowCollision) {
     collisionCounter += 1;
@@ -192,7 +201,7 @@ function draw() {
     }
   }
 
-  //win logic
+  // win logic
   // if (Player1Score === 10) {
   //   Player1Score = 0;
   //   Player2Score = 0;
@@ -207,14 +216,14 @@ function draw() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawTopBound();
-  drawTopGoalEntrance();
   drawTopPaddle();
   drawMiddleCircle();
   drawMiddleCircleBorders();
   drawBall();
   drawBottomPaddle();
-  drawBottomGoalEntrance();
   drawBottomBound();
+  drawBottomGoalEntrance();
+  drawTopGoalEntrance();
 
   let bottomPaddleDx = x - bottomPaddleX;
   let bottomPaddleDy = y - bottomPaddleY;
@@ -236,12 +245,13 @@ function draw() {
       //make it bounce off of the parts of the wall without the goal
       dy = -dy;
     } else {
-      //goal logic for player 1
+      //goal logic for player 2
       //reset coordinates to center
       x = canvas.width / 2;
       y = canvas.height / 2;
       dx = -dx;
       dy = -dy;
+      // sleep(2000);
 
       //increase the score
       Player2Score += 1;
@@ -257,6 +267,7 @@ function draw() {
       y = canvas.height / 2;
       dx = -dx;
       dy = -dy;
+      // sleep(2000);
 
       //increase the score
       Player1Score += 1;
