@@ -337,24 +337,24 @@ function draw() {
 
   //keeps the top paddle within the boundaries of the table when moving left, right, up, or down
   if (dPressed && topPaddleX < canvas.width-(topPaddleRadius + 5)) {
-    topPaddleX += 7;
+    topPaddleX += 5;
   } else if (aPressed && topPaddleX > 25) {
-    topPaddleX -= 7;
+    topPaddleX -= 5;
   } else if (sPressed && topPaddleY < (canvas.height * (3/10))) {
-    topPaddleY += 7;
+    topPaddleY += 5;
   } else if (wPressed && topPaddleY > topPaddleRadius + 5) {
-    topPaddleY -= 7;
+    topPaddleY -= 5;
   }
 
   //keeps the bottom paddle within the boundaries of the table when moving left, right, up, or down
   if (rightPressed && bottomPaddleX < canvas.width-(bottomPaddleRadius + 5)) {
-    bottomPaddleX += 7;
+    bottomPaddleX += 5;
   } else if (leftPressed && bottomPaddleX > 25) {
-    bottomPaddleX -= 7;
+    bottomPaddleX -= 5;
   } else if (downPressed && bottomPaddleY < canvas.height-(bottomPaddleRadius + 5)) {
-    bottomPaddleY += 7;
+    bottomPaddleY += 5;
   } else if (upPressed && bottomPaddleY > (canvas.height * (7/10))) {
-    bottomPaddleY -= 7;
+    bottomPaddleY -= 5;
   }
 
   //keep the ball moving with the small change

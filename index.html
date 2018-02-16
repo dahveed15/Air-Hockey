@@ -8,24 +8,52 @@
     <link rel="stylesheet" href="./css/air_hockey.css">
   </head>
   <body>
-    <h1>Air Hockey</h1>
-    <canvas id="myCanvas" width="320" height="576"></canvas>
+    <div class="header">
+      <h1>Air Hockey</h1>
+    </div>
+    <div class="main-container">
 
-    <span>Player 1 Score:
-      <p id="player1-score"></p>
-    </span>
+      <div class="move-canvas">
 
-    <span>Player 2 Score:
-      <p id="player2-score"></p>
-    </span>
 
-    <input type="button" id="start-game" value="Start Game"/>
+        <div class="player-stats">
 
-    <footer>
-      <a href="https://github.com/dahveed15/Air-Hockey"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/david-harris-8ab454151/"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fas fa-phone"></i></a>
-    </footer>
+          <div class="player-score-flex">
+            <span>Player 1:
+            </span>
+            <p id="player1-score"></p>
+          </div>
+
+          <div class="player-score-flex">
+            <span>Player 2:
+            </span>
+            <p id="player2-score"></p>
+          </div>
+        </div>
+
+        <div class="">
+          <canvas id="myCanvas" width="320" height="576"></canvas>
+        </div>
+
+      </div>
+
+      <div class="move-scores">
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="button-options">
+        <input type="button" id="start-game" value="Start Game"/>
+      </div>
+
+      <footer>
+        <a href="https://github.com/dahveed15/Air-Hockey"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/david-harris-8ab454151/"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fas fa-phone"></i></a>
+      </footer>
+    </div>
+
+
 
     <script type="text/javascript" src="./js/ball.js"></script>
   </body>
