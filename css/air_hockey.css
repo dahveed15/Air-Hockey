@@ -1,6 +1,7 @@
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* .header{
@@ -45,7 +46,11 @@ h1 {
 
 .player-stats span {
   margin-right: 5px;
+  font-family: 'Lato', sans-serif;
+}
 
+#player1-score, #player2-score {
+  font-family: 'Lato', sans-serif;
 }
 
 .player-score-flex{
