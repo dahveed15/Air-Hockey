@@ -67,8 +67,6 @@ h1 {
   justify-content: center;
 }
 
-
-
 canvas {
   background: #eee;
   display: block;
@@ -82,6 +80,7 @@ canvas {
 input[type="button"] {
   cursor: pointer;
   margin: 20px 0;
+  font-size: 1000px;
 }
 
 .button-options {
